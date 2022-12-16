@@ -15,7 +15,7 @@ import br.com.devcapu.capu.ui.theme.ForrestGreen
 
 @Composable
 fun SoundsToggles() {
-    LazyColumn(modifier = Modifier.fillMaxSize()) {
+    LazyColumn(modifier = Modifier.fillMaxWidth().fillMaxHeight(0.5f)) {
         item {
             Toggle(
                 label = "Pessoas",
@@ -66,7 +66,7 @@ private fun Toggle(
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp)
+            .padding(8.dp)
     ) {
         Row(
             modifier = Modifier

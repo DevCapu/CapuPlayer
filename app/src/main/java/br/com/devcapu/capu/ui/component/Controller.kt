@@ -16,14 +16,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import br.com.devcapu.capu.ui.MusicUiState
 import br.com.devcapu.capu.ui.theme.ForrestGreen
 
 @Composable
 fun Controller(
-    music: String,
-    artist: String,
-    isPlaying: Boolean,
-    onClickPlayerButton: () -> Unit,
+   state: MusicUiState
 ) {
     Column(
         modifier = Modifier
@@ -38,26 +36,26 @@ fun Controller(
         ) {
             Column {
                 Text(
-                    text = music,
+                    text = state.music,
                     style = MaterialTheme.typography.body1,
                     color = Color.White
                 )
                 Text(
-                    text = artist,
+                    text = state.artist,
                     style = MaterialTheme.typography.body1,
                     color = Color.White,
                     fontSize = 14.sp
                 )
             }
             IconButton(
-                onClick = onClickPlayerButton,
+                onClick = state.onClickPlayButton,
                 modifier = Modifier
                     .background(
                         color = Color.White,
                         shape = RoundedCornerShape(percent = 50)
                     )
             ) {
-                val image = if (isPlaying) {
+                val image = if (state.isPlaying) {
                     Default.PlayArrow
                 } else {
                     Default.Home
@@ -88,9 +86,11 @@ fun Controller(
 @Composable
 fun ControllerPreview() {
     Controller(
-        music = "Ela partiu",
-        artist = "Tim Maia - Bdexx Remix",
-        isPlaying = false,
-        onClickPlayerButton = { }
+        state = MusicUiState(
+            music = "Ela partiu | Capu remix",
+            artist = "capu",
+            isPlaying = true,
+            onClickPlayButton = { }
+        )
     )
 }
