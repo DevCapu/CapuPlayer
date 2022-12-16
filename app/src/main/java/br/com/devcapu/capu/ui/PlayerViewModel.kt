@@ -9,17 +9,25 @@ data class PlayerScreenUiState(
 )
 
 data class MusicUiState(
-    val music: String = "",
-    val artist: String = "",
+    val music: String = "belas",
+    val artist: String = "eevee",
     var isPlaying: Boolean = false,
-    val onClickPlayButton: () -> Unit = {}
+    val onClickPlayButton: () -> Unit = {},
 )
 
-class PlayerViewModel: ViewModel() {
+class PlayerViewModel : ViewModel() {
     private var _state = MutableStateFlow(PlayerScreenUiState())
     val state: Flow<PlayerScreenUiState> = _state
 
     init {
+        _state.value = _state.value.copy(
+            musicUiState = _state.value.musicUiState.copy(
+                onClickPlayButton = { playOrPauseMusic() }
+            )
+        )
+    }
+
+    private fun playOrPauseMusic() {
         _state.value = _state.value.copy(
             musicUiState = _state.value.musicUiState.copy(
                 isPlaying = !_state.value.musicUiState.isPlaying
